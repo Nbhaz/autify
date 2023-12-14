@@ -1,6 +1,6 @@
 import datetime
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 from src.domain.dumper import Dumper
 from src.domain.fetcher import Fetcher
 from src.domain.task_response import TaskResponse
@@ -14,7 +14,9 @@ class TestWebsiteTask(unittest.TestCase):
 
     def test_execute_success_with_dumper(self):
         # Create an instance of WebsiteTask
-        website_task = WebsiteTask(url="http://example.com", fetcher=self.mock_fetcher, dumper=self.mock_dumper)
+        website_task = WebsiteTask(
+            url="http://example.com", fetcher=self.mock_fetcher, dumper=self.mock_dumper
+        )
 
         # Mock the fetcher response
         mock_fetch_response = MagicMock()
@@ -23,8 +25,9 @@ class TestWebsiteTask(unittest.TestCase):
         self.mock_fetcher.fetch.return_value = mock_fetch_response
 
         # Mock the dumper save method
-        mock_dumper_save_response = TaskResponse(success=True, key="example.com.html",
-                                                 executionTime=datetime.datetime.now())
+        mock_dumper_save_response = TaskResponse(
+            success=True, key="example.com.html", execution_time=datetime.datetime.now()
+        )
         self.mock_dumper.save.return_value = mock_dumper_save_response
 
         # Call the execute method
@@ -32,11 +35,15 @@ class TestWebsiteTask(unittest.TestCase):
 
         # Assert that fetcher.fetch and dumper.save were called with the expected arguments
         self.mock_fetcher.fetch.assert_called_once_with("http://example.com")
-        self.mock_dumper.save.assert_called_once_with(key="example.com.html", content="Mocked HTML content")
+        self.mock_dumper.save.assert_called_once_with(
+            key="example.com.html", content="Mocked HTML content"
+        )
 
     def test_execute_failure(self):
         # Create an instance of WebsiteTask
-        website_task = WebsiteTask(url="http://example.com", fetcher=self.mock_fetcher, dumper=self.mock_dumper)
+        website_task = WebsiteTask(
+            url="http://example.com", fetcher=self.mock_fetcher, dumper=self.mock_dumper
+        )
 
         # Mock the fetcher response
         mock_fetch_response = MagicMock()

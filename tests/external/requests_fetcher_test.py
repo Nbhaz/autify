@@ -5,13 +5,11 @@ from src.util.constants import INVALID_URL
 
 
 class RequestsFetcherBaseTest(unittest.TestCase):
-
     def setUp(self):
         self.fetcher = RequestsFetcher()
 
 
 class ValidUrlFetchTest(RequestsFetcherBaseTest):
-
     def test(self):
         response = self.fetcher.fetch("https://www.morff.io")
         self.assertTrue(response.is_success())
@@ -20,7 +18,6 @@ class ValidUrlFetchTest(RequestsFetcherBaseTest):
 
 
 class InValidUrlFetchTest(RequestsFetcherBaseTest):
-
     def test(self):
         response = self.fetcher.fetch("http/www.morff.io")
         self.assertFalse(response.is_success())
@@ -30,7 +27,6 @@ class InValidUrlFetchTest(RequestsFetcherBaseTest):
 
 
 class UrlFetchErrorTest(RequestsFetcherBaseTest):
-
     def test(self):
         response = self.fetcher.fetch("https://abc.xyz.tbc")
         self.assertFalse(response.is_success())

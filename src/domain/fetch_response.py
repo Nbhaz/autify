@@ -1,5 +1,4 @@
 class FetchResponse:
-
     def __init__(self, is_success: bool, content: str = None, error: str = None):
         self._success = is_success
         self._content = content
