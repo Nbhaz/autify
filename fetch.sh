@@ -11,8 +11,12 @@ docker build -t $IMAGE_NAME .
 if [ $? -eq 0 ]; then
     echo "Docker image build successful"
 
+    echo "=================RUN START================="
+
     # Run Docker container with arguments
     docker run --name $CONTAINER_NAME -v ${PWD}:/app "$IMAGE_NAME" "$@"
+
+    echo "=================RUN Complete================="
 
     # Clean up - remove the container after it exits
     docker container rm $CONTAINER_NAME
